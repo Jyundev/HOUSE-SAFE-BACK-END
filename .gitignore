@@ -1,3 +1,56 @@
-node_modules
-# Keep environment variables out of version control
+# Node modules
+node_modules/
+
+# Build output
+dist/
+build/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Environment files
 .env
+.env.*  
+
+# Log files
+logs/
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE/editor directories and files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# NPM/Yarn lock files (optional; typically you want these in version control)
+package-lock.json
+yarn.lock
+
+### yarn ###
+# https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+
+.yarn/*
+!.yarn/releases
+!.yarn/patches
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+# Prisma files (if using Prisma)
+prisma/dev.db
+prisma/migrations/
+prisma/*.db
+
+# Coverage directory used by testing tools
+coverage/
+
+# TypeScript declaration files (if not using them)
+*.d.ts
+
+# Miscellaneous
+*.tgz
+*.swp
