@@ -11,10 +11,14 @@ build/
 # Environment files
 .env
 .env.*  
+.env.local
 
 # Log files
 logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Operating system files
 .DS_Store
@@ -25,10 +29,19 @@ Thumbs.db
 .idea/
 *.sublime-workspace
 *.sublime-project
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.tmp
 
 # NPM/Yarn lock files (optional; typically you want these in version control)
 package-lock.json
 yarn.lock
+
+# History files
+.history/
 
 ### yarn ###
 # https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
