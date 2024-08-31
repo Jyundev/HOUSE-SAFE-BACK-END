@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model bad_landlord {
+model BadLandlord {
   id                Int      @id @default(autoincrement()) // 기본 키, UUID로 자동 생성
   name              String   @db.VarChar(50) // 최대 50자까지 저장 가능한 문자열 (이름)
   age               Int?     @db.UnsignedTinyInt // 부호 없는 작은 정수 (나이)
@@ -25,4 +25,73 @@ model bad_landlord {
   reimbursementDebt Decimal  @db.Decimal(15, 2) // 소수점 이하 2자리, 최대 15자리까지의 정수 (구상채무)
   executionCount    Int      @db.UnsignedTinyInt // 부호 없는 작은 정수 (강제집행 또는 보전처분 신청 횟수)
   referenceDate     DateTime @db.Date // 날짜 데이터 (기준일)
+  report      Reports[]
+
+}
+
+
+model RealEstateAgent {
+  id Int @id @default(autoincrement())
+  officeName String @db.VarChar(255)
+  registrationNumber String @db.VarChar(20)
+  businessType String @db.VarChar(50)
+  addressStreet String @db.VarChar(100)
+  addressNumber String? @db.VarChar(100)
+  phoneNumber String? @db.VarChar(20)
+  registrationDate DateTime @db.Date
+  insuranceStatus String @db.Char(1)
+  representativeName String @db.VarChar(100)
+  latitude Decimal? @db.Decimal(10, 8)
+  longitude Decimal? @db.Decimal(11, 8)
+  providerCode Int
+  providerName String @db.VarChar(100)
+  report      Reports[]
+
+}
+
+model ApartSalesPrice {
+  id Int @id @default(autoincrement())
+  district String @db.VarChar(50)
+  lotNumber String @db.VarChar(20)
+  mainNumber Int
+  complexName String @db.VarChar(100)
+  areaSqm Decimal @db.Decimal(7,4)
+  contractDay DateTime @db.Date
+  transactionAmount Int 
+  building String? @db.VarChar(50)
+  floor Int @db.TinyInt
+  yearBuilt String @db.VarChar(4)
+  roadName String  @db.VarChar(100)
+  transactionType String @db.VarChar(20)
+  brokerLocation String? @db.VarChar(50)
+  registrationDate DateTime? @db.Date
+  report      Reports[]
+
+}
+
+model Users {
+  id String @id @default(uuid())
+  name        String @db.VarChar(50)
+  email       String @db.VarChar(100)
+  age         Int
+  report      Reports[]
+}
+
+model Reports {
+  id String @id @default(uuid()) 
+  address String @db.VarChar(255)
+  transactionAmount Int
+  leaseAmount Int
+  leaseRate Decimal @db.Decimal(5,2)
+  userId String 
+  realEstateId Int
+  apartPriceId Int
+  badLandlordId Int
+
+  // 참조
+  user Users @relation(fields: [userId], references: [id]) // 외래 키 관계 설정
+  badLandlord BadLandlord @relation(fields: [badLandlordId], references: [id]) // 외래 키 관계 설정
+  apartSalesPrice ApartSalesPrice @relation(fields: [apartPriceId], references: [id]) // 외래 키 관계 설정
+  realeStateAgent RealEstateAgent @relation(fields: [realEstateId], references: [id]) // 외래 키 관계 설정
+
 }
