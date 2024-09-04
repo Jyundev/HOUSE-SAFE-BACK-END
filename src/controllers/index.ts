@@ -1,5 +1,6 @@
-import LandlordController  from "../landlords/controller"; // 올바른 경로 확인
+import LandlordController  from "../landlords/controller"; 
+import UserController  from "../users/controller"; 
 
-const Controllers = [LandlordController];
+const Controllers = [LandlordController, UserController];
 
 export default Controllers;

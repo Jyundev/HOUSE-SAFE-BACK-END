@@ -9,7 +9,7 @@ export class LandlordService {
     }
 
     console.log(name);
-    const landlords = await database.bad_landlord.findMany({
+    const landlords = await database.badLandlord.findMany({
       where: {
         name,
       },
@@ -17,7 +17,7 @@ export class LandlordService {
       take,
     });
 
-    const count = await database.bad_landlord.count({
+    const count = await database.badLandlord.count({
       where: {
         name,
       },
@@ -35,12 +35,12 @@ export class LandlordService {
 
 
   async findLandlords({ skip = 0, take = 20 }) {
-    const landlords = await database.bad_landlord.findMany({
+    const landlords = await database.badLandlord.findMany({
       skip,
       take,
     });
 
-    const count = await database.bad_landlord.count();
+    const count = await database.badLandlord.count();
 
     return {
       landlords,

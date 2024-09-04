@@ -21,8 +21,8 @@ class LandlordController {
   async getLandlords(req: Request, res: Response, next: NextFunction) {
     try {
       const { landlords, count } = await this.landlordService.findLandlords({
-        skip: req.skip ?? 0,  // 기본값 설정
-        take: req.take ?? 20, // 기본값 설정
+        skip: req.skip,  
+        take: req.take
       });
 
       const landlordsDTO = landlords.map(LandlordDTO.fromEntity);
@@ -40,8 +40,8 @@ class LandlordController {
     try {
       const { name } = req.params;
       const { landlords, count } = await this.landlordService.findLandlordByName(name, {
-        skip: req.skip ?? 0,  // 기본값 설정
-        take: req.take ?? 20, // 기본값 설정
+        skip: req.skip ,
+        take: req.take 
       });
 
       const landlordsDTO = landlords.map(LandlordDTO.fromEntity);
