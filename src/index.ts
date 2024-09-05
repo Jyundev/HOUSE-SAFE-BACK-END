@@ -11,7 +11,6 @@ import { options, swaggerDocs } from "./swagger";
     const app = express();
     const PORT = process.env.PORT || 8000;
 
-    console.log(swaggerDocs)
 
     try {
         await database.$connect();

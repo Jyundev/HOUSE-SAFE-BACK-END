@@ -1,5 +1,5 @@
 export const getUserSwagger = {
-  "/users/detail/:id": {
+  "/users/detail/{id}": {
     get: {
       tags: ["User"],
       summary: "유저 상세 조회합니다.",
@@ -9,7 +9,7 @@ export const getUserSwagger = {
           name: "id",
           required: true,
           schema: {
-            type: "number",
+            type: "string",
           },
         },
       ],
@@ -35,9 +35,7 @@ export const getUserSwagger = {
                       email: {
                         type: "string",
                       },
-                      phoneNumber: {
-                        type: "string",
-                      },
+
                     },
                   },
                 },
@@ -93,9 +91,7 @@ export const getUsersSwagger = {
                       email: {
                         type: "string",
                       },
-                      phoneNumber: {
-                        type: "string",
-                      },
+
                     },
                   },
                   count: {
@@ -141,9 +137,7 @@ export const updateUserSwagger = {
                 email: {
                   type: "string",
                 },
-                phoneNumber: {
-                  type: "string",
-                },
+
               },
             },
           },
@@ -185,9 +179,6 @@ export const createUserSwagger = {
                 email: {
                   type: "string",
                 },
-                phoneNumber: {
-                  type: "string",
-                },
               },
             },
           },
@@ -195,12 +186,13 @@ export const createUserSwagger = {
       },
       responses: {
         201: {
+          description: "User created successfully", 
           content: {
             "application/json": {
               schema: {
                 type: "object",
-                properties: {
-                  id: "string",
+                id: {
+                  type: "string", 
                 },
               },
             },
@@ -212,7 +204,7 @@ export const createUserSwagger = {
 };
 
 export const deleteUserSwagger = {
-  "/users": {
+  "/users/{id}": {
     delete: {
       tags: ["User"],
       summary: "유저를 삭제합니다.",
@@ -222,7 +214,7 @@ export const deleteUserSwagger = {
           name: "id",
           required: true,
           schema: {
-            type: "number",
+            type: "string",
           },
         },
       ],

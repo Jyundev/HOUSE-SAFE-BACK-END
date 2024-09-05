@@ -20,35 +20,30 @@ const Swaggers: { [key: string]: SwaggerAPI } = {
 };
 
 // 1) 병합 로직: Swagger API의 paths 객체를 병합하여 하나의 paths 객체를 생성
-const { paths } = Object.values(Swaggers).reduce(
-    (acc, apis) => {
-        const APIs = Object.values(apis);
+const mergedPaths = Object.values(Swaggers).reduce((acc, apis) => {
+    // 각 API 정의는 객체이므로 Object.entries로 경로와 메서드를 처리
+    Object.entries(apis).forEach(([path, methods]) => {
+        if (!acc[path]) {
+            acc[path] = methods; // 경로가 없으면 새로 추가
+        } else {
+            // 경로가 이미 존재하는 경우, 메서드들을 병합
+            Object.entries(methods).forEach(([method, definition]) => {
+                acc[path][method] = definition; // 기존 메서드에 새로운 정의 추가
+            });
+        }
 
-        APIs.forEach((api) => {
-            const [path, methods] = Object.entries(api)[0];
+    });
 
-            if (!acc.paths[path]) {
-                acc.paths[path] = methods;
-            } else {
-                // 병합: 기존 메서드와 새로운 메서드를 병합
-                acc.paths[path] = {
-                    ...acc.paths[path], // 기존 메서드
-                    ...methods // 새로운 메서드
-                };
-            }
-        });
-
-        return acc;
-    },
-    { paths: {} }
-);
+    return acc;
+}, {});
 
 
 // 2) 스웨거에 등록할 JSON 만들기 (DefaultSwagger + 병합된 paths)
 export const swaggerDocs = {
     ...DefaultSwagger,
-    paths, // 병합된 paths 등록
+    paths: mergedPaths, // 병합된 paths 등록
 };
+
 
 
 // 3) 스웨거에 등록할 옵션 설정
