@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
+import swaggerUI from "swagger-ui-express";
 import Controllers from "./controllers";
 import database from "./database";
-
-// import { options, swaggerDocs } from "./swagger";
+import { options, swaggerDocs } from "./swagger";
 
 (async () => {
     const helmet = require('helmet');
@@ -10,6 +10,8 @@ import database from "./database";
     const cors = require('cors');
     const app = express();
     const PORT = process.env.PORT || 8000;
+
+    console.log(swaggerDocs)
 
     try {
         await database.$connect();
@@ -33,12 +35,13 @@ import database from "./database";
         }
     });
 
-    // Swagger Documentation
-    // app.get("/swagger.json", (req, res) => {
-    //     res.status(200).json(swaggerDocs);
-    // });
+    // Swagger Documentation JSON 제공
+    app.get('/swagger.json', (req: Request, res: Response) => {
+        res.status(200).json(swaggerDocs);
+    });
 
-    // app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs, options));
+    // Swagger UI 설정
+    app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs, options));
 
     // Error Handling Middleware
     app.use((err: any, req: Request, res: Response, next: NextFunction) => {
