@@ -1,5 +1,7 @@
 // Swagger 관련 모듈 임포트
 import * as UserSwagger from '../users/swagger';
+import * as LandlordSwagger from '../landlords/swagger';
+
 import DefaultSwagger from './defaultSwagger';
 
 // Swagger의 Path 객체에 대한 타입 정의
@@ -17,6 +19,7 @@ interface SwaggerAPI {
 // Swaggers 객체 구성
 const Swaggers: { [key: string]: SwaggerAPI } = {
     ...UserSwagger,
+    ...LandlordSwagger
 };
 
 // 1) 병합 로직: Swagger API의 paths 객체를 병합하여 하나의 paths 객체를 생성

@@ -19,12 +19,12 @@ model BadLandlord {
   age               Int?     @db.UnsignedTinyInt // 부호 없는 작은 정수 (나이)
   address           String   @db.VarChar(255) // 최대 255자까지 저장 가능한 문자열 (주소)
   depositObligation Decimal  @db.Decimal(15, 2) // 소수점 이하 2자리, 최대 15자리까지의 정수 (보증금 의무)
-  dueDate           DateTime @db.Date // 날짜 데이터 (채무 발생일)
+  dueDate           String 
   delinquency       Int      @db.UnsignedSmallInt // 부호 없는 작은 정수 (채무 불이행 기간)
-  fulfillmentDate   DateTime @db.Date // 날짜 데이터 (이행일)
+  fulfillmentDate   String 
   reimbursementDebt Decimal  @db.Decimal(15, 2) // 소수점 이하 2자리, 최대 15자리까지의 정수 (구상채무)
   executionCount    Int      @db.UnsignedTinyInt // 부호 없는 작은 정수 (강제집행 또는 보전처분 신청 횟수)
-  referenceDate     DateTime @db.Date // 날짜 데이터 (기준일)
+  referenceDate     String 
   report      Reports[]
 
 }

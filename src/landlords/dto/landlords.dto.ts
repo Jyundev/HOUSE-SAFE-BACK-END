@@ -5,24 +5,24 @@ export class LandlordDTO {
     age?: number | null;  // TINYINT UNSIGNED (Optional as it might be nullable)
     address: string;  // VARCHAR(255)
     depositObligation: number;  // DECIMAL(15,2)
-    dueDate: Date;  // DATE
+    dueDate: string;  // DATE
     delinquency: number;  // SMALLINT UNSIGNED
-    fulfillmentDate: Date;  // DATE
+    fulfillmentDate: string;  // DATE
     reimbursementDebt: number;  // DECIMAL(15,2)
     executionCount: number;  // TINYINT UNSIGNED
-    referenceDate: Date;  // DATE
+    referenceDate: string;  // DATE
 
     constructor(landLord: {
         name: string,
         age?: number,
         address: string,
         depositObligation: number,
-        dueDate: Date,
+        dueDate: string,
         delinquency: number,
-        fulfillmentDate: Date,
+        fulfillmentDate: string,
         reimbursementDebt: number,
         executionCount: number,
-        referenceDate: Date
+        referenceDate: string
     }) {
         this.name = landLord.name;
         this.age = landLord.age ?? undefined;
@@ -42,12 +42,12 @@ export class LandlordDTO {
         age?: number | null,
         address: string,
         depositObligation: Decimal,
-        dueDate: Date,
+        dueDate: string,
         delinquency: number,
-        fulfillmentDate: Date,
+        fulfillmentDate: string,
         reimbursementDebt: Decimal,
         executionCount: number,
-        referenceDate: Date
+        referenceDate: string
     }): LandlordDTO {
         return new LandlordDTO({
             name: landlord.name,

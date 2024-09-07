@@ -42,6 +42,7 @@ export class LandlordService {
 
     const count = await database.badLandlord.count();
 
+    
     return {
       landlords,
       count,
